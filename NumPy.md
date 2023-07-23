@@ -595,7 +595,7 @@ print(np.sort(arr))
 
 ## 数组过滤
 
-从现有数组中取出一些元素并从中创建新数组称为过滤（filtering）。
+**从现有数组中取出一些元素并从中创建新数组称为过滤（filtering）。**
 
 在 NumPy 中，我们使用布尔索引列表来过滤数组。
 
@@ -614,3 +614,158 @@ newarr = arr[x]
 
 print(newarr)
 ```
+
+## 创建过滤器数组——即创建布尔索引列表
+
+### 实例
+
+创建一个过滤器数组，该数组仅返回原始数组中的偶数元素：
+
+```python
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5, 6, 7])
+
+# 创建一个空列表
+filter_arr = []
+
+# 遍历 arr 中的每个元素
+for element in arr:
+  # 如果元素可以被 2 整除，则将值设置为 True，否则设置为 False
+  if element % 2 == 0:
+    filter_arr.append(True)
+  else:
+    filter_arr.append(False)
+
+newarr = arr[filter_arr]
+
+print(filter_arr)
+print(newarr)
+```
+
+[False, True, False, True, False, True, False]
+[2 4 6]
+
+## 直接从数组创建过滤器
+
+我们可以在条件中直接替换数组而不是 iterable 变量
+
+### 实例
+
+创建一个仅返回大于 62 的值的过滤器数组：
+
+```python
+import numpy as np
+
+arr = np.array([61, 62, 63, 64, 65])
+
+filter_arr = arr > 62
+
+newarr = arr[filter_arr]
+
+print(filter_arr)
+print(newarr)
+```
+
+[False False True True True]
+[63 64 65]
+
+## 生成随机数
+
+NumPy 提供了 random 模块来处理随机数。
+
+### 实例
+
+生成一个 0 到 100 之间的随机整数：
+
+```python
+from numpy import random
+
+x = random.randint(100)
+
+print(x)
+```
+
+## 生成随机浮点
+
+random 模块的 `rand()` 方法返回 **0 到 1** 之间的随机浮点数。
+
+## 生成随机数组
+
+### 实例
+
+生成有 3 行的 2-D 数组，每行包含 5 个从 0 到 100 之间的随机整数：
+
+```python
+from numpy import random
+
+x = random.randint(100, size=(3, 5))
+
+print(x)
+```
+
+[[35 76 81 51 22]
+ [85 17 60 22 27]
+ [56 53 75 94 16]]
+
+浮点数利用rand（）即可
+
+## 从数组生成随机数
+
+`choice()` 方法使您可以基于值数组生成随机值。
+
+`choice()` 方法将数组作为参数，并随
+
+### choice()` 方法还允许您返回一个值数组。
+
+请添加一个 `size` 参数以指定数组的形状。
+
+### 实例
+
+生成由数组参数（3、5、7 和 9）中的值组成的二维数组：
+
+```
+from numpy import random
+
+x = random.choice([3, 5, 7, 9], size=(3, 5))
+
+print(x)
+```
+
+机返回其中一个值。
+
+# NumPy ufuncs
+
+ufuncs 指的是“通用函数”（Universal Functions），它们是对 ndarray 对象进行操作的 NumPy 函数。
+
+## 为什么要使用 ufuncs？
+
+ufunc 用于在 NumPy 中实现矢量化，这比迭代元素要快得多。
+
+它们还提供广播和其他方法，例如减少、累加等，它们对计算非常有帮助。
+
+ufuncs 还接受其他参数，比如：
+
+`where` 布尔值数组或条件，用于定义应在何处进行操作。
+
+`dtype` 定义元素的返回类型。
+
+`out` 返回值应被复制到的输出数组。
+
+## 什么是向量化？
+
+将迭代语句转换为基于向量的操作称为向量化。
+
+通过 ufunc，我们可以使用 `add()` 函数：
+
+```python
+import numpy as np
+
+x = [1, 2, 3, 4]
+y = [4, 5, 6, 7]
+z = np.add(x, y)
+
+print(z)
+```
+
+[ 5 7 9 11]
